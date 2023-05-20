@@ -58,3 +58,8 @@ exploit
 
 
 脚本会返回apache-flink的版本信息，若存在漏洞则会上传`exp.jar`包，成功上传后会返回jar包落地的文件名，并且会执行该jar包
+执行完攻击载荷就可以在msf上看是否反弹了shell回来
+
+![image](https://github.com/FeiNiao/Apache-flink-fileupload-getshell/assets/66779835/8c367411-c3ce-4043-be51-fcf55629b5f8)
+
+成功反弹shell，并且可以成功执行命令
